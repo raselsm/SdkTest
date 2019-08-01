@@ -1,0 +1,67 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+ext {
+    bintrayRepo = 'maven' // Name of the Bintray repo you created
+    bintrayName = 'com.sm.recyclerbaseadapter_rsl:preference' // Bintray package name
+
+    publishedGroupId = 'com.sm.recyclerbaseadapter_rsl' // Group ID of the SDK which will be added in implementation line of gradle
+    artifact = 'preference' // Artifact ID of the SDK which will be added in implementation line of gradle
+    libraryVersion = '4.8' // Version of the library you created in Bintray
+
+    libraryName = 'Preference Utlity' // It is generally the module name
+    libraryDescription = 'Utlity to use shared preference in your app.' // Small description of the library
+
+    siteUrl = 'https://github.com/mohitrajput987/android-utility'
+    gitUrl = 'https://github.com/mohitrajput987/android-utility.git'
+
+    developerId = 'raselmdeveloper1'
+    developerName = 'RaSeL Hossain'
+    developerEmail = 'rasel@shurjomukhi.com.bd'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+
+    //Bintray Credentials
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+    bintrayUsername = properties.getProperty('raselmdeveloper1')
+    bintrayUserOrg = properties.getProperty('raselmdeveloperorganization')
+    bintrayApiKey = properties.getProperty('22ee65bdc04c6c6c1daa14ee8626f148e0b14a85')
+}
+
+android {
+    compileSdkVersion 28
+
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
+apply from: 'bintray.script'
